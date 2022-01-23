@@ -32,7 +32,6 @@ namespace ImportDLL.Core
             {
                 IntPtr hWnd;
                 internalMessageBox = DLLFunctionLoader.LoadFunction<MessageBoxDelegate>("user32.dll", "MessageBoxA", out hWnd);
-
             }
             catch (Exception ex)
             {
@@ -48,7 +47,6 @@ namespace ImportDLL.Core
             try
             {
                 result = internalMessageBox(new IntPtr(0), pText, pCaption, pType);
-
             }
             catch (Exception ex)
             {

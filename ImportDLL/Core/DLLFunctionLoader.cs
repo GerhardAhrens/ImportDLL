@@ -30,7 +30,7 @@ namespace System.Runtime.InteropServices
         [DllImport("kernel32.dll")]
         private static extern bool FreeLibrary(IntPtr hModule);
 
-        public static T LoadFunction<T>(string pDllPath, string pFunctionName, out IntPtr functionAddress)
+        public static TDelegate LoadFunction<TDelegate>(string pDllPath, string pFunctionName, out IntPtr functionAddress)
         {
             Delegate result = null;
             IntPtr hModule = System.IntPtr.Zero;
@@ -49,7 +49,7 @@ namespace System.Runtime.InteropServices
                     functionAddress = GetProcAddress(hModule, pFunctionName);
                     if (functionAddress.ToInt64() > 0)
                     {
-                        result = Marshal.GetDelegateForFunctionPointer(functionAddress, typeof(T));
+                        result = Marshal.GetDelegateForFunctionPointer(functionAddress, typeof(TDelegate));
                     }
                     else
                     {
@@ -65,7 +65,7 @@ namespace System.Runtime.InteropServices
                         functionAddress = GetProcAddress(hModule, pFunctionName);
                         if (functionAddress.ToInt32() > 0)
                         {
-                            result = Marshal.GetDelegateForFunctionPointer(functionAddress, typeof(T));
+                            result = Marshal.GetDelegateForFunctionPointer(functionAddress, typeof(TDelegate));
                         }
                         else
                         {
@@ -91,10 +91,10 @@ namespace System.Runtime.InteropServices
                 FreeLibrary(hModule);
             }
 
-            return (T)(object)result;
+            return (TDelegate)(object)result;
         }
 
-        public static T LoadFunction<T>(string pDllPath, string pFunctionName)
+        public static TDelegate LoadFunction<TDelegate>(string pDllPath, string pFunctionName)
         {
             Delegate result = null;
             IntPtr functionAddress;
@@ -114,7 +114,7 @@ namespace System.Runtime.InteropServices
                     functionAddress = GetProcAddress(hModule, pFunctionName);
                     if (functionAddress.ToInt64() > 0)
                     {
-                        result = Marshal.GetDelegateForFunctionPointer(functionAddress, typeof(T));
+                        result = Marshal.GetDelegateForFunctionPointer(functionAddress, typeof(TDelegate));
                     }
                     else
                     {
@@ -130,7 +130,7 @@ namespace System.Runtime.InteropServices
                         functionAddress = GetProcAddress(hModule, pFunctionName);
                         if (functionAddress.ToInt32() > 0)
                         {
-                            result = Marshal.GetDelegateForFunctionPointer(functionAddress, typeof(T));
+                            result = Marshal.GetDelegateForFunctionPointer(functionAddress, typeof(TDelegate));
                         }
                         else
                         {
@@ -156,7 +156,7 @@ namespace System.Runtime.InteropServices
                 FreeLibrary(hModule);
             }
 
-            return (T)(object)result;
+            return (TDelegate)(object)result;
         }
     }
 }

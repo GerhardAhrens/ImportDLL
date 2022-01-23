@@ -22,7 +22,6 @@ namespace ImportDLL.Core
     public class MyBeep
     {
         private delegate int BeepDelegate(int frequenz, int dauer);
-
         private static BeepDelegate internalBeep;
 
         static MyBeep()
